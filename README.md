@@ -3,9 +3,9 @@
 This repository contains R scripts and data used to construct and validate a prognostic model based on cancer-associated fibroblast (CAF)-related genes in cervical cancer patients.
 
 ## Data
-- TCGA cervical cancer dataset
-- GEO datasets: GSE63514, GSE7803
-
+- TCGA cervical cancer dataset >> https://portal.gdc.cancer.gov/projects/TCGA-CESC
+- GEO datasets: GSE63514 >> https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE63514
+                GSE7803 >> https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE7803
 ## Methods
 - Differential gene expression analysis (DEGs)
 - XCell algorithm (https://comphealth.ucsf.edu/app/xcell) for fibroblast enrichment score
@@ -21,13 +21,6 @@ This repository contains R scripts and data used to construct and validate a pro
 - `GSE63514 DEGs analysis.R` – DEG analysis for GSE63514
 - `GSE7803 DEGs analysis.R` – DEG analysis for GSE7803
 - `Validate (Prognostic model).R` – Model validation
-
-## How to Run
-You can run each steps by using the raw data and other supplement files in each step 
-
-## Requirements
-- R version ≥ 4.0
-- Packages: survival, glmnet, ggplot2, survivalROC, tidyverse
 
 ## Contact
 For questions, please contact: Khaohom2802@gmail.com
