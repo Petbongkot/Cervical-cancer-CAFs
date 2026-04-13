@@ -4,6 +4,7 @@ library(estimate)
 library(tidyverse)
 help(package="estimate")
 
+#This code were used#
 CervicalCancerExpr <- system.file("extdata", "7803_raw.txt", package="estimate")
 filterCommonGenes(input.f= CervicalCancerExpr, output.f="gene_expression7803.gct", id ="GeneSymbol")
 gene_expression7803 <- system.file("extdata", "gene_expression7803.gct", package="estimate")
@@ -12,8 +13,9 @@ Estimatescore7803 <- system.file("extdata", "EstimateScore7803.gct", package="es
 plotPurity(Estimatescore7803, samples="all_samples", platform = c("affymetrix", "agilent", "illumina"),
            output.dir="estimated_purity_plots7803")
 
-?plotPurity
 
+#############################################################################################################################################################
+Full code version
 
 #Part1
 # Filter Common genes
@@ -42,8 +44,7 @@ print(paste("This dataset includes ", nrow(input.f1), "genes.", sep=""))
 print(paste(x.mismatched.genes, "genes were mismatched.", sep=""))
 outputGCT(input.f1,output.f  = "gene_expression7803.gct")
 
-#Part2 ให้ผลเหมือนกับการทำfunction outputGCT ในPart1
-ng
+#Part2 
 
 if(is.data.frame(input.f1)==TRUE)
   exp.data <- input.f1 else
