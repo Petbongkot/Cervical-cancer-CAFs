@@ -90,57 +90,6 @@ plot(sft$fitIndices[,1], sft$fitIndices[,5],
 
 text(sft$fitIndices[,1], sft$fitIndices[,5], labels=powers, cex=cex1,col="red")
 
-
-##############################
-png("SoftThreshold_WGCNA.png",
-    width = 9 * 300,    # 9 inches × 300 dpi
-    height = 5 * 300,   # 5 inches × 300 dpi
-    res = 300)
-
-par(mfrow = c(1,2))
-cex1 = 0.9
-
-# Scale-free topology fit index
-plot(sft$fitIndices[,1],
-     -sign(sft$fitIndices[,3]) * sft$fitIndices[,2],
-     xlab = "Soft Threshold (power)",
-     ylab = "Scale Free Topology Model Fit, signed R^2",
-     type = "n",
-     main = "Scale independence")
-
-text(sft$fitIndices[,1],
-     -sign(sft$fitIndices[,3]) * sft$fitIndices[,2],
-     labels = powers,
-     cex = cex1,
-     col = "red")
-
-abline(h = 0.90, col = "red")
-
-# Mean connectivity
-plot(sft$fitIndices[,1],
-     sft$fitIndices[,5],
-     xlab = "Soft Threshold (power)",
-     ylab = "Mean Connectivity",
-     type = "n",
-     main = "Mean connectivity")
-
-text(sft$fitIndices[,1],
-     sft$fitIndices[,5],
-     labels = powers,
-     cex = cex1,
-     col = "red")
-
-mtext("A",
-      side = 3,
-      outer = TRUE,
-      line = -2,
-      adj = 0.05,
-      cex = 2,
-      font = 2)
-
-dev.off()
-############################################################################
-
 softPower = 14
 adjacency = adjacency(datExpr, power = softPower, type = "unsigned") 
 
@@ -228,15 +177,6 @@ textMatrix =  paste(signif(moduleTraitCor, 2), "\n(",
                     signif(moduleTraitPvalue, 1), ")", sep = "");
 dim(textMatrix) = dim(moduleTraitCor)
 # Display the correlation values within a heatmap plot
-
-###########################################################
-png("ModuleTraitHeatmap63514.png",
-    width = 2000 ,    
-    height = 5000 ,   
-    res = 300)
-par(mar = c(5, 10, 4, 2))   
-par(mfrow = c(1,1))
-
 labeledHeatmap(Matrix = moduleTraitCor,
                xLabels = names(datTraits),
                yLabels = names(MEs),
@@ -249,18 +189,6 @@ labeledHeatmap(Matrix = moduleTraitCor,
                zlim = c(-1,1),
                main = paste("Module-trait relationships"))
 
-
-mtext("B",
-      side = 3,
-      outer = TRUE,
-      line = -2,
-      adj = 0.05,
-      cex = 2,
-      font = 2)
-
-dev.off()
-
-#############################################################################################
 # Calculate module eigengenes
 MEs = moduleEigengenes(datExpr, colors = moduleColors)$eigengenes
 
@@ -295,12 +223,6 @@ Text <- text(x = max(MM) * 0.8, y = max(GS) * 0.8,
              pos = 4)
 
 # Create a scatter plot
-
-png("Greenyellow.png",
-    width = 6 * 300,
-    height = 6 * 300,
-    res = 300)
-
 par(mfrow = c(1, 1))
 par(mar = c(6, 8.5, 3, 3))
 
@@ -318,21 +240,9 @@ abline(lm(GS ~ MM), col = "black")
 abline(v =0.6, col = "red", lty = 2) # Vertical line at mean of MM
 abline(h = 0.5, col = "red", lty = 2) # Horizontal line at mean of GS
 
-
-mtext("C",
-      side = 3,
-      outer = TRUE,
-      line = -2,
-      adj = 0.05,
-      cex = 2,
-      font = 2)
-
-dev.off()
-
-
-# Calculate Module Membership (kME) for the chosen module (ต้องรัน2โค้ดนี้เสมอก่อนรันแยกดูแต่ละmodule)
+# Calculate Module Membership (kME) for the chosen module 
 kME1 = as.data.frame(cor(datExpr, ME, use = "p"))
-# Calculate Gene Significance (GS) for the trait of interest (if trait is available)
+# Calculate Gene Significance (GS) for the trait of interest 
 # Replace 'trait' with your actual trait data if applicable
 GS1 = as.data.frame(cor(datExpr, datTraits, use = "p"))
 
@@ -387,11 +297,6 @@ Text <- text(x = max(MM) * 0.8, y = max(GS) * 0.8,
              pos = 4)
 
 # Create a scatter plot
-png("Lightcyan.png",
-    width = 6 * 300,
-    height = 6 * 300,
-    res = 300)
-
 par(mfrow = c(1, 1))
 par(mar = c(6, 8.5, 3, 3))
 
@@ -409,19 +314,17 @@ abline(lm(GS ~ MM), col = "black")
 abline(v =0.6, col = "red", lty = 2) # Vertical line at mean of MM
 abline(h = 0.5, col = "red", lty = 2) # Horizontal line at mean of GS
 
-dev.off()
 
-
-# Calculate Module Membership (kME) for the chosen module (ต้องรัน2โค้ดนี้เสมอก่อนรันแยกดูแต่ละmodule)
+# Calculate Module Membership (kME) for the chosen module 
 kME1 = as.data.frame(cor(datExpr, ME, use = "p"))
-# Calculate Gene Significance (GS) for the trait of interest (if trait is available)
+# Calculate Gene Significance (GS) for the trait of interest
 # Replace 'trait' with your actual trait data if applicable
 GS1 = as.data.frame(cor(datExpr, datTraits, use = "p"))
 #1.Black
 # Subset the data to include only genes in the chosen module
 lightcyan_indices <- which(moduleColors == "lightcyan")
 lightcyan <- names(datExpr)[lightcyan_indices]
-# Subset kME and GS to include only genes in the "greenyellow" module
+# Subset kME and GS to include only genes in the "lightcyan" module
 kME_lightcyan <- kME1[lightcyan_indices, , drop = FALSE]
 GS_lightcyan <- GS1[lightcyan_indices, , drop = FALSE]
 
@@ -467,11 +370,6 @@ Text <- text(x = max(MM) * 0.8, y = max(GS) * 0.8,
              pos = 4)
 
 # Create a scatter plot
-png("Salmon.png",
-    width = 6 * 300,
-    height = 6 * 300,
-    res = 300)
-
 par(mfrow = c(1, 1))
 par(mar = c(6, 8.5, 3, 3))
 
@@ -489,18 +387,17 @@ abline(lm(GS ~ MM), col = "black")
 abline(v =0.6, col = "red", lty = 2) # Vertical line at mean of MM
 abline(h = 0.5, col = "red", lty = 2) # Horizontal line at mean of GS
 
-dev.off()
 
-# Calculate Module Membership (kME) for the chosen module (ต้องรัน2โค้ดนี้เสมอก่อนรันแยกดูแต่ละmodule)
+# Calculate Module Membership (kME) for the chosen module 
 kME1 = as.data.frame(cor(datExpr, ME, use = "p"))
-# Calculate Gene Significance (GS) for the trait of interest (if trait is available)
+# Calculate Gene Significance (GS) for the trait of interest 
 # Replace 'trait' with your actual trait data if applicable
 GS1 = as.data.frame(cor(datExpr, datTraits, use = "p"))
 #3.Pink
 # Subset the data to include only genes in the chosen module
 salmon_indices <- which(moduleColors == "salmon")
 salmon <- names(datExpr)[salmon_indices]
-# Subset kME and GS to include only genes in the "greenyellow" module
+# Subset kME and GS to include only genes in the "salmon" module
 kME_salmon<- kME1[salmon_indices, , drop = FALSE]
 GS_salmon <- GS1[salmon_indices, , drop = FALSE]
 
