@@ -4,7 +4,7 @@ library(estimate)
 library(tidyverse)
 help(package="estimate")
 
-#This code were used
+#This code were used#
 CervicalCancerExpr <- system.file("extdata", "63514_raw.txt", package="estimate")
 filterCommonGenes(input.f= CervicalCancerExpr, output.f="gene_expression63514.gct", id ="GeneSymbol")
 gene_expression63514 <- system.file("extdata", "gene_expression63514.gct", package="estimate")
@@ -14,7 +14,7 @@ plotPurity(Estimatescore63514, samples="all_samples", platform = c("affymetrix",
 output.dir="estimated_purity_plots63514")
 
 #######################################################################################################
-Full code
+Full code version
 #Part1
 # Filter Common genes
 CervicalCancerExpr <- system.file("extdata", "63514_raw.txt", package="estimate")
