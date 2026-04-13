@@ -31,8 +31,7 @@ input.data <- read.table(CervicalCancerExpr, header=TRUE, row.names=1, sep="\t",
   print(paste(x.mismatched.genes, "genes were mismatched.", sep=""))
   outputGCT(input.f1,output.f  = "gene_expression.gct")
 
-#Part2 ให้ผลเหมือนกับการทำfunction outputGCT ในPart1
-ng
+#Part2 
     
     if(is.data.frame(input.f1)==TRUE) 
       exp.data <- input.f1 else 
