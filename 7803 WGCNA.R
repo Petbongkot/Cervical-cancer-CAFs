@@ -3,7 +3,6 @@ library(flashClust)
 library(tidyverse)
 library(dplyr)
 
-setwd("C:/Users/Khaohom/OneDrive - Prince of Songkla University/เดสก์ท็อป/CAFs- Research/WGCNA/Peter Langfelder and Steve Horvath (2208)/7803")
 options(stringsAsFactors = FALSE)
 enableWGCNAThreads()
 
@@ -177,8 +176,7 @@ labeledHeatmap(Matrix = moduleTraitCor,
                zlim = c(-1,1),
                main = paste("Module-trait relationships"))
 
-
-
+#################################################################
 # Calculate module eigengenes
 MEs = moduleEigengenes(datExpr, colors = moduleColors)$eigengenes
 
@@ -230,12 +228,11 @@ abline(v =0.7, col = "red", lty = 2) # Vertical line at mean of MM
 abline(h = 0.3, col = "red", lty = 2) # Horizontal line at mean of GS
 
 
-# Calculate Module Membership (kME) for the chosen module (ต้องรัน2โค้ดนี้เสมอก่อนรันแยกดูแต่ละmodule)
+# Calculate Module Membership (kME) for the chosen module 
 kME1 = as.data.frame(cor(datExpr, ME, use = "p"))
-# Calculate Gene Significance (GS) for the trait of interest (if trait is available)
+# Calculate Gene Significance (GS) for the trait of interest 
 # Replace 'trait' with your actual trait data if applicable
 GS1 = as.data.frame(cor(datExpr, datTraits, use = "p"))
-#1.Black
 # Subset the data to include only genes in the chosen module
 greenyellow_indices <- which(moduleColors == "greenyellow")
 greenyellow <- names(datExpr)[greenyellow_indices]
@@ -250,7 +247,7 @@ selected_genes_greenyellow<- greenyellow[kME_greenyellow[, 1] > 0.7 & GS_greenye
 selected_genes_greenyellow <- as.data.frame(selected_genes_greenyellow)
 write.table(selected_genes_greenyellow, file = "greenyellow.txt", row.names = FALSE, sep = "\t")
 
-
+###############################################################################################
 # Calculate module eigengenes
 MEs = moduleEigengenes(datExpr, colors = moduleColors)$eigengenes
 
@@ -302,16 +299,15 @@ abline(v =0.7, col = "red", lty = 2) # Vertical line at mean of MM
 abline(h = 0.3, col = "red", lty = 2) # Horizontal line at mean of GS
 
 
-# Calculate Module Membership (kME) for the chosen module (ต้องรัน2โค้ดนี้เสมอก่อนรันแยกดูแต่ละmodule)
+# Calculate Module Membership (kME) for the chosen module 
 kME1 = as.data.frame(cor(datExpr, ME, use = "p"))
-# Calculate Gene Significance (GS) for the trait of interest (if trait is available)
+# Calculate Gene Significance (GS) for the trait of interest 
 # Replace 'trait' with your actual trait data if applicable
 GS1 = as.data.frame(cor(datExpr, datTraits, use = "p"))
-#1.Black
 # Subset the data to include only genes in the chosen module
 purple_indices <- which(moduleColors == "purple")
 purple <- names(datExpr)[purple_indices]
-# Subset kME and GS to include only genes in the "greenyellow" module
+# Subset kME and GS to include only genes in the "purple" module
 kME_purple <- kME1[purple_indices, , drop = FALSE]
 GS_purple <- GS1[purple_indices, , drop = FALSE]
 
